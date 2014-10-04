@@ -5,6 +5,8 @@ Groupify::Application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'landing_pages#home'
 
+   get 'about' => 'landing_pages#about', :via => :get
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -4,6 +4,7 @@
   <title>Groupify | <%= yield(:title) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
   <%= csrf_meta_tags %>
 <style>
 body { padding-top: 70px; }
@@ -15,6 +16,6 @@ body { padding-top: 70px; }
 
 <%= yield %>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </body>
 </html>
