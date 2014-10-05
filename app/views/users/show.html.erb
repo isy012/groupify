@@ -2,50 +2,43 @@
 
 <h3>Groups</h3>
 
-
-<%= Group.find(1).title + " | " + Group.find(1).content %>
-<br>
-Spots Left: <%= Group.find(1).seats %> 
-
-<%= form_for(current_user.attendances.
-                          build(group_id: 1)) do |f| %>
-  <div><%= hidden_field_tag :group_id, 1 %></div>
-  <%= f.submit "Claim", class: "btn btn-primary" %>
-<% end %>
+<% @group.each do |g| %>
+<!-- how to check if user has attendance? -->
 
 <div class="panel panel-info">
-  <div class="panel-heading">NYC Bus | Saturday October 11, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
-  <div class="panel-body">
-  $5pp for 59 friends. Please paypal isy012@hotmail.com.
-  </div>
-   <div class="panel-footer">
-   	Spots Left <span class="badge">1</span>
-	<br>
-	</div>
-</div>
+  <div class="panel-heading"><%= g.title %> | <%= g.when %>
+  <span class="btn-group">
+  <!-- if user has not claimed it/// -->
+  <% if !current_user.attendances.find_by(group_id: g.id) %>
 
-<div class="panel panel-success">
-  <div class="panel-heading">Maid Service | Saturday October 18, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
-  <div class="panel-body">
-  	$20pp for 1 room in Wannamaker Apartment Complex for 20 friends. Please paypal isy012@hotmail.com.
-  </div>
-   <div class="panel-footer">
-   	Spots Left <span class="badge">18</span>
-	<br>
-	<% (1..10).each do |i| %>
-	<% end %>
-	</div>
-</div>
 
-<div class="panel panel-warning">
-  <div class="panel-heading">Blueprint Cleanse | Saturday October 18, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
-  <div class="panel-body">
-    $50pp for 6 bottles a week. Please paypal isy012@hotmail.com.
-  </div>
-   <div class="panel-footer">
-    Minimum <span class="badge">4</span>
-  <br>
-  <% (1..10).each do |i| %>
+    <%= form_for(current_user.attendances.build(group_id: g.id)) do |f| %>
+    <div><%= hidden_field_tag :group_id, g.id %></div>
+    <%= f.submit "Reserve", class: "btn btn-primary btn-xs" %>
+    <% end %>
+  <!-- ///if user has not claimed it -->
+  <% else %> 
+  <!-- if user has claimed it show cancellation -->  
+    <%= form_for(current_user.attendances.find_by(user_id: current_user.id), html: { method: :delete }) do |f| %>
+    <%= f.submit "Cancel", class: "btn btn-danger btn-xs" %>
+    <% end %>
+
   <% end %>
+
+   </span>
+
   </div>
+  <div class="panel-body">
+  <%= g.content %>
+  </div>
+  <div class="panel-footer">
+  Spots Left <span class="badge"><%= g.seats %></span>
+  | People Going: 
+  <% g.attendances.all.each do |gg| %>
+  <%= User.find(gg.user_id).name %>
+  <% end %>
+  <br>
 </div>
+</div>
+
+<% end %>

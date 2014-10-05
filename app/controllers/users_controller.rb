@@ -4,26 +4,14 @@ class UsersController < ApplicationController
   end
 
   def create
-  	@user = User.new(user_params) #send hash of user attribute
-  	if @user.save
+    @user = User.new(user_params) #send hash of user attribute
+    if @user.save
       log_in @user
       flash[:success] = "You've signed Up"
-  		redirect_to @user
+  	  redirect_to @user
   	else
   		render 'new'
   	end
-  end
-
-  def claim(group)
-    attendances.create(group_id: group.id)
-  end
-
-  def example
-    "OH AI"
-  end
-
-  def cancel(group)
-    attendances.find_by(group_id: group.id).destroy
   end
 
   def show
