@@ -1,11 +1,12 @@
 Groupify::Application.routes.draw do
+  get "users/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-   root 'landing_pages#home'
-
-   get 'about' => 'landing_pages#about', :via => :get
+  root 'landing_pages#home'
+  get 'about' => 'landing_pages#about', :via => :get
+  get 'signup' => 'users#new', :via => :get
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.1'
 
 
 # Use SCSS for stylesheets
@@ -26,6 +26,9 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+# encrypt passwords
+gem 'bcrypt-ruby'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
