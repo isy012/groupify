@@ -13,7 +13,15 @@ Groupify::Application.routes.draw do
   post   'login'   => 'sessions#create'
   delete 'logout'  => 'sessions#destroy'
 
+  # resources :users do 
+  #   member do
+  #     get :groups
+  #   end
+  # end
   resources :users
+
+  resources :attendances,   only: [:create, :destroy]
+  resources :sessions,      only: [:new, :create, :destroy]
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

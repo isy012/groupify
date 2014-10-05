@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
-  has_many :attendances,  class_name: "Attendance",
-                          foreign_key: "user_id",
-                          dependent: :destroy
+  #has_many :attendances,  class_name: "Attendance",
+  #                        foreign_key: "user_id",
+  #                        dependent: :destroy
+  has_many :attendances
   has_many :groups, through: :attendances
 
 

@@ -2,9 +2,16 @@
 
 <h3>Groups</h3>
 
+
 <%= Group.find(1).title + " | " + Group.find(1).content %>
 <br>
-Spots Left: <%= Group.find(1).seats %> <button type="button" class="btn btn-danger btn-xs">Claim</button>
+Spots Left: <%= Group.find(1).seats %> 
+
+<%= form_for(current_user.attendances.
+                          build(group_id: 1)) do |f| %>
+  <div><%= hidden_field_tag :group_id, 1 %></div>
+  <%= f.submit "Claim", class: "btn btn-primary" %>
+<% end %>
 
 <div class="panel panel-info">
   <div class="panel-heading">NYC Bus | Saturday October 11, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
