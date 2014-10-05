@@ -1,3 +1,7 @@
+<% if !logged_in? %>
+         Please  <%= link_to 'Sign Up', signup_path %> or 
+          <%= link_to "Log in", login_path %>
+<% else %>
 <% provide(:title, @user.name) %>
 
 <h3>Groups</h3>
@@ -40,5 +44,5 @@
   <br>
 </div>
 </div>
-
+  <% end %>
 <% end %>

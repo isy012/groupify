@@ -10,7 +10,7 @@ class AttendancesController < ApplicationController
       group.save
       flash[:success] = "Claimed" 
     else
-      flash[:danger] = "Maxed out"
+      flash[:danger] = "Sorry, that group is full :("
     end
     
     redirect_to current_user
