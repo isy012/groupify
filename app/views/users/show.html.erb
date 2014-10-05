@@ -1,11 +1,40 @@
 <% provide(:title, @user.name) %>
 
+<h3>Groups</h3>
 
+<div class="panel panel-info">
+  <div class="panel-heading">NYC Bus | Saturday October 11, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
+  <div class="panel-body">
+  $5pp for 59 friends. Please paypal isy012@hotmail.com.
+  </div>
+   <div class="panel-footer">
+   	Spots Left <span class="badge">1</span>
+	<br>
+	</div>
+</div>
 
+<div class="panel panel-success">
+  <div class="panel-heading">Maid Service | Saturday October 18, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
+  <div class="panel-body">
+  	$20pp for 1 room in Wannamaker Apartment Complex for 20 friends. Please paypal isy012@hotmail.com.
+  </div>
+   <div class="panel-footer">
+   	Spots Left <span class="badge">18</span>
+	<br>
+	<% (1..10).each do |i| %>
+	<% end %>
+	</div>
+</div>
 
-<h3> Hi, <%= @user.name %> </h3>
-
-<div class="row">
-  <div class="col-xs-3">3</div>
-  <div class="col-xs-9">9</div>
+<div class="panel panel-warning">
+  <div class="panel-heading">Blueprint Cleanse | Saturday October 18, 2014 <button type="button" class="btn btn-danger btn-xs">Claim</button></div>
+  <div class="panel-body">
+    $50pp for 6 bottles a week. Please paypal isy012@hotmail.com.
+  </div>
+   <div class="panel-footer">
+    Minimum <span class="badge">4</span>
+  <br>
+  <% (1..10).each do |i| %>
+  <% end %>
+  </div>
 </div>
