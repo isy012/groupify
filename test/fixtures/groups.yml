@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyText
+  when: 2014-10-05 08:31:34
+  seats: 1
+  content: MyText
+
+two:
+  title: MyText
+  when: 2014-10-05 08:31:34
+  seats: 1
+  content: MyText

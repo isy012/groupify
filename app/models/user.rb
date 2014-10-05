@@ -1,4 +1,10 @@
 class User < ActiveRecord::Base
+  has_many :attendances,  class_name: "Attendance",
+                          foreign_key: "user_id",
+                          dependent: :destroy
+  has_many :groups, through: :attendances
+
+
 	attr_accessor :remember_token
 	before_save { self.email = email.downcase }
 	
