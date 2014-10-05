@@ -8,6 +8,8 @@ Groupify::Application.routes.draw do
   get 'about' => 'landing_pages#about', :via => :get
   get 'signup' => 'users#new', :via => :get
 
+  resources :users
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
