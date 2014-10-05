@@ -1,4 +1,5 @@
 Groupify::Application.routes.draw do
+  get "sessions/new"
   get "users/new"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -7,6 +8,10 @@ Groupify::Application.routes.draw do
   root 'landing_pages#home'
   get 'about' => 'landing_pages#about', :via => :get
   get 'signup' => 'users#new', :via => :get
+
+  get    'login'   => 'sessions#new'
+  post   'login'   => 'sessions#create'
+  delete 'logout'  => 'sessions#destroy'
 
   resources :users
   
