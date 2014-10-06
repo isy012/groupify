@@ -12,7 +12,7 @@ class AttendancesController < ApplicationController
       temp.save
       group.seats = group.seats-1
       group.save
-      flash[:success] = "Claimed" 
+      flash[:success] = "You're In!" 
     else
       flash[:danger] = "Sorry, that group is full :("
     end
@@ -29,9 +29,6 @@ class AttendancesController < ApplicationController
     currentgroup.seats = currentgroup.seats+1
     currentgroup.save
     flash[:danger] = "Cancelled" 
-    #redirect_to root_path && return
-    #redirect_to home, :notice => "Cancelled."
-    #redirect_to :controller => 'users', :action => 'get'
     redirect_to current_user
   end
 

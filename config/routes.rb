@@ -8,6 +8,7 @@ Groupify::Application.routes.draw do
   root 'landing_pages#home'
   get 'about' => 'landing_pages#about', :via => :get
   get 'signup' => 'users#new', :via => :get
+  get 'faq' => 'landing_pages#faq', :via => :get
 
   get    'login'   => 'sessions#new'
   post   'login'   => 'sessions#create'
