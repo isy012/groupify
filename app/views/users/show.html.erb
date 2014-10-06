@@ -10,7 +10,7 @@
 <!-- how to check if user has attendance? -->
 
 <div class="panel panel-info">
-  <div class="panel-heading"><%= g.title %> | <%= g.when %>
+  <div class="panel-heading"><%= link_to g.title + " @ " + g.when.to_formatted_s(:long), group_path(id: g.id) %> 
   <span class="btn-group">
   <!-- if user has not claimed it/// -->
   <% if !current_user.attendances.find_by(group_id: g.id) %>

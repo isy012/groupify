@@ -1,0 +1,15 @@
+<div class="panel panel-info">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><%= @group.title %></div>
+  <div class="panel-body">
+    <p><%= @group.content %></p>
+  </div>
+
+  <!-- Table -->
+  <table class="table table-bordered table-striped">
+    <tr><th>Name</th><th>Committed?</th></tr>
+<% @group.attendances.all.each do |gg| %>
+    <tr><td><%= User.find(gg.user_id).name %></td><td><span class="glyphicon glyphicon-ok"></span></td></tr>
+    <% end %>
+  </table>
+</div>

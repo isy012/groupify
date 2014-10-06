@@ -1,5 +1,9 @@
 class AttendancesController < ApplicationController
   def create
+    if !logged_in?
+      flash[:danger] = "Please Sign In"
+      redirect_to sign_up_path
+    end
     group = Group.find(params[:group_id])
     temp = Attendance.new(group_id: group.id, user_id: current_user.id)
     #temp.save #record it
