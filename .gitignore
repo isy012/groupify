@@ -14,3 +14,7 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore Development And Test Environment Settings From Public View
+/config/environments/development.rb
+/config/environments/test.rb
