@@ -28,6 +28,7 @@ class AttendancesController < ApplicationController
     currentAttendance.destroy
     currentgroup.seats = currentgroup.seats+1
     currentgroup.save
+    NotificationsMailer.welcome_email().deliver
     flash[:danger] = "Cancelled" 
     redirect_to current_user
   end
