@@ -4,7 +4,7 @@ class NotificationsMailer < ActionMailer::Base
   def welcome_email()
   	#@user = current_user
   	#mail to: 'isabelle.y.park@gmail.com', subject: 'Welcome to my wonderful website'
-	mail(:to => 'ipark012@yahoo.com', :subject => 'Sup')  
+	mail(:to => 'groupmaster@usegroupify.com', :subject => 'Notification')  
   end
 
 end
