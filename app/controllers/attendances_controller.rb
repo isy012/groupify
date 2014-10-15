@@ -17,20 +17,23 @@ class AttendancesController < ApplicationController
       flash[:danger] = "Sorry, that group is full :("
     end
     
-    redirect_to current_user
+    redirect_to groups_path
   end
 
   def destroy
-    #Find group id by user id
+    #the current user's group id
+    #currentgroup = Group.find_by(params[:group_id])
     currentgroup = Attendance.find(params[:id]).group
-    #Find attendance id by user id
-    currentAttendance = Attendance.find_by(params[:user_id])
+    #destroy only the current user's id
+    currentAttendance = Attendance.find_by(:group_id => currentgroup.id, :user_id => current_user.id)
+    #currentAttendance = Attendance.find_by(params[:id])
+    logger.debug "current attendance is: #{currentAttendance.attributes.inspect}"
     currentAttendance.destroy
     currentgroup.seats = currentgroup.seats+1
     currentgroup.save
-    NotificationsMailer.welcome_email().deliver
+    #NotificationsMailer.welcome_email().deliver
     flash[:danger] = "Cancelled" 
-    redirect_to current_user
+    redirect_to groups_path
   end
 
 end

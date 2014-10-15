@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
   end
 
   def index
-  	@group = Group.all
-
+    @group = Group.order('created_at DESC').all
+    @user = User.all
   end
 end

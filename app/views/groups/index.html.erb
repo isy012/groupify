@@ -1,19 +1,37 @@
+<% provide(:title, 'Groups') %>
 <% if !logged_in? %>
-         Please  <%= link_to 'Sign Up', signup_path %> or 
-          <%= link_to "Log in", login_path %>
-<% else %>
 <% provide(:title, @user.name) %>
 
-<h3>Your Groups</h3>
+ <% @group.each do |g| %>
+<div class="panel panel-info">
+  <div class="panel-heading"><%= g.title %></div>
+    <div class="panel-body">
+      <%= g.content %>
+    </div>
 
-<% @user.attendances.each do |g| %>
+    <div class="panel-footer">
+      Spots Left <span class="badge"><%= g.seats %></span>
+      People Going: 
+      <span class="badge"><% g.attendances.count %></span>
+    </div>
+  </div>
+
+ <% end %>
+
+</div>
+<% else %>
+
+<h3>Today's Groups</h3>
+
+<% @group.each do |g| %>
 <!-- how to check if user has attendance? -->
 
 <div class="panel panel-info">
-  <div class="panel-heading"><%= link_to g.group.title + " @ " + g.group.when.to_formatted_s(:long), group_path(id: g.id) %> 
+  <div class="panel-heading"><%= link_to g.title + " @ " + g.when.to_formatted_s(:long), group_path(id: g.id) %> 
   <span class="btn-group">
   <!-- if user has not claimed it/// -->
-  <% if !current_user.attendances.find_by(group_id: g.group.id) %>
+  <% if !current_user.attendances.find_by(group_id: g.id) %>
+
 
     <%= form_for(current_user.attendances.build(group_id: g.id)) do |f| %>
     <div><%= hidden_field_tag :group_id, g.id %></div>
@@ -32,13 +50,13 @@
 
   </div>
   <div class="panel-body">
-  <%= g.group.content %>
+  <%= g.content %>
   </div>
   <div class="panel-footer">
-  Spots Left <span class="badge"><%= g.group.seats %></span>
+  Spots Left <span class="badge"><%= g.seats %></span>
   | People Going: 
-  <% g.group.attendances.all.each do |gg| %>
-  <%= User.find(gg.user_id).name %>
+  <% g.attendances.all.each do |gg| %>
+  <span class="badge"><%= User.find(gg.user_id).name %></span>
   <% end %>
   <br>
 </div>
