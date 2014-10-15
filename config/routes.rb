@@ -19,6 +19,9 @@ Groupify::Application.routes.draw do
   resources :sessions,      only: [:new, :create, :destroy]
   resources :groups
   
+  namespace :api do
+    resources :groups
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
