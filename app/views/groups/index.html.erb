@@ -3,6 +3,7 @@
 <% provide(:title, @user.name) %>
 
  <% @group.each do |g| %>
+
 <div class="panel panel-info">
   <div class="panel-heading"><%= g.title %></div>
     <div class="panel-body">
@@ -10,9 +11,8 @@
     </div>
 
     <div class="panel-footer">
-      Spots Left <span class="badge"><%= g.seats %></span>
       People Going: 
-      <span class="badge"><% g.attendances.count %></span>
+      <span class="badge"><%= g.attendances.count %></span>
     </div>
   </div>
 
@@ -25,7 +25,6 @@
 
 <% @group.each do |g| %>
 <!-- how to check if user has attendance? -->
-
 <div class="panel panel-info">
   <div class="panel-heading"><%= link_to g.title + " @ " + g.when.to_formatted_s(:long), group_path(id: g.id) %> 
   <span class="btn-group">
