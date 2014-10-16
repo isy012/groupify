@@ -12,6 +12,9 @@ class AttendancesController < ApplicationController
       temp.save
       group.seats = group.seats-1
       group.save
+      current_user.karma += 10
+      current_user.save
+      puts "KARMA 11 POINTS"
       flash[:success] = "You're In!" 
     else
       flash[:danger] = "Sorry, that group is full :("
@@ -27,10 +30,11 @@ class AttendancesController < ApplicationController
     #destroy only the current user's id
     currentAttendance = Attendance.find_by(:group_id => currentgroup.id, :user_id => current_user.id)
     #currentAttendance = Attendance.find_by(params[:id])
-    logger.debug "current attendance is: #{currentAttendance.attributes.inspect}"
     currentAttendance.destroy
     currentgroup.seats = currentgroup.seats+1
     currentgroup.save
+    current_user.karma -= 11
+    current_user.save
     #NotificationsMailer.welcome_email().deliver
     flash[:danger] = "Cancelled" 
     redirect_to groups_path

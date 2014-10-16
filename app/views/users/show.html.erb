@@ -5,7 +5,8 @@
 <% provide(:title, @user.name) %>
 <div>
       <h3>Your Groups</h3>
-
+  Karma: <%= current_user.karma %>
+  <br>
       <%= button_to "Create Your Own", new_group_path, :class => "btn btn-success btn-xs", :method => :get %>
 
 <br>

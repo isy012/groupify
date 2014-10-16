@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  
   def new
   	@user = User.new
   end
@@ -14,16 +16,38 @@ class UsersController < ApplicationController
   	end
   end
 
+  def edit
+   # @user = User.find(params[:id])
+  end
+
   def show
-  	@user = User.find(params[:id])
+  	#@user = User.find(params[:id])
     @group = Group.order('created_at DESC').all
   end
 
+  def update
+    respond_to do |format|
+      if @user.update(user_params)
+        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: 'edit' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
   private
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_user
+      @user = User.find_by_id(params[:id])
+    end
 
     def user_params
       params.require(:user).permit(:name, :email, :password,
-                                   :password_confirmation)
+                                   :password_confirmation, :karma)
     end
 
     # Before filters
