@@ -27,7 +27,7 @@
   <!-- ///if user has not claimed it -->
   <% else %> 
   <!-- if user has claimed it show cancellation -->  
-    <%= form_for(current_user.attendances.find_by(user_id: current_user.id), html: { method: :delete }) do |f| %>
+    <%= form_for(current_user.attendances.find_by(user_id: current_user.id), html: { method: :delete, data: {confirm: 'Cancelling will cause a karma imbalance and may affect your future Groupify use. Are you sure?'} }) do |f| %>
     <%= f.submit "Cancel", class: "btn btn-danger btn-xs" %>
     <% end %>
 

@@ -1,7 +1,7 @@
 <% provide(:title, @group.title) %>
 
         <td><%= link_to 'Edit', edit_group_path(@group) %></td>
-        <td><%= link_to 'Destroy', @group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Cancel Group', @group, method: :delete, data: { confirm: 'Cancelling the event will notify the group. Are you sure?' } %></td>
         <%= link_to "View My Groups", current_user %>
         <%= link_to "View All Groups", groups_path %>
 <div class="panel panel-info">
