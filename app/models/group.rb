@@ -4,4 +4,5 @@ class Group < ActiveRecord::Base
   has_one :user
 
   validates_numericality_of :seats, :only_integer => true, :greater_than_or_equal_to => 0 
+  validates(:when, 	presence: true)
 end
