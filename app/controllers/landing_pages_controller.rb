@@ -1,6 +1,7 @@
 class LandingPagesController < ApplicationController
 
 def home
+	@group = Group.all
 end
 
 def about

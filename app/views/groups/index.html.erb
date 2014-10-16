@@ -2,7 +2,7 @@
 <% if !logged_in? %>
 <% provide(:title, @user.name) %>
 
- <% @group.each do |g| %>
+<% @group.each do |g| %>
 
 <div class="panel panel-info">
   <div class="panel-heading"><%= g.title %></div>
@@ -26,7 +26,7 @@
 <% @group.each do |g| %>
 <!-- how to check if user has attendance? -->
 <div class="panel panel-info">
-  <div class="panel-heading"><%= link_to g.title + " @ " + g.when.to_formatted_s(:long), group_path(id: g.id) %> 
+  <div class="panel-heading"><%= link_to g.title + " @ " + g.when.to_formatted_s(:long), group_path(id: g.id) %> organized by <%= User.find(g.user_id).name %>
   <span class="btn-group">
   <!-- if user has not claimed it/// -->
   <% if !current_user.attendances.find_by(group_id: g.id) %>

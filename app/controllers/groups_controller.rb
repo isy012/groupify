@@ -2,12 +2,6 @@ class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
 
   def show
-  	#@group = Group.find(params[:id])
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.xml  { render :xml => @group }
-    #  format.json { render :json => @group }
-    #end
   end
 
   def index
@@ -24,9 +18,23 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
+    
+    #check to see if user has more than 5 events
+    if Group.where("user_id = ?", current_user.id).count <= 2
+      @group.user_id = current_user.id  
+      current_user.karma += 10
+    else
+      #overloaded
+      flash.now[:danger] = 'User Has Too Many Groups Created' # Not quite right!
+      render :action => 'new'
+      return
+    end
 
     respond_to do |format|
       if @group.save
+        current_user.save
+        temp = Attendance.new(group_id: @group.id, user_id: current_user.id)
+        temp.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @group }
       else
@@ -51,7 +59,7 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     respond_to do |format|
-      format.html { redirect_to groups_url }
+      format.html { redirect_to current_user }
       format.json { head :no_content }
     end
   end

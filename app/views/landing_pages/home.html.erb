@@ -4,17 +4,31 @@
 <h1>80% of success in life is showing up.</h1>
 
   <footer><cite title="Source Title"> - Woody Allen</cite></footer>
-<hr>
 <p class="lead">Groupify shows you nearby group deals and events.</p>
-<button class="btn btn-large btn-success">Download Private Beta</button>
-<hr>
-<h1>Benefits</h1>
+ <%= button_to "Sign Up", signup_path, :class => "btn btn-success btn-large", :method => 'get'%>
 </div>
+<hr>
+
+<p class="lead"> Groups Forming Now</p>
+<% @group.take(5).each do |g| %>
+<div class="panel panel-info">
+  <div class="panel-heading"><%= g.title %></div>
+    <div class="panel-footer">
+      People Going: 
+      <span class="badge"><%= g.attendances.count %></span>
+    </div>
+  </div>
+ <% end %>
+
+
+
+<hr>
+<h1>How It Works</h1>
 
 <p class="lead">
 <ol>
-  <li>Everytime your group shows up to redeem a deal or offer, you all earn life points towards future deals and offers.</li>
-  <li><s>Everyone hates flakes.</s> Local businesses end up losing a lot when you don't show up. We work with local businesses to offer rewards for showing up more often.</li>
+  <li>Everytime you sign up with a group, you all earn karma.</li>
+  <li><s>Everyone hates flakes.</s> Organizers lose more than just money when you cancel.</li>
   <li>When you don't show up, you lose. In fact, everyone loses. Not making good on your promises has negative consequences in our system.</li>
   <li>Have feedback? Let us know by emailing us at groupmaster@usegroupify.com. </li>
 </ol>

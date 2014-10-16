@@ -14,13 +14,17 @@ class AttendancesController < ApplicationController
       group.save
       current_user.karma += 10
       current_user.save
-      puts "KARMA 11 POINTS"
+      organizer = User.find(group.user_id)
+      if organizer.id != current_user.id
+        organizer.karma += 5
+        organizer.save
+      end
       flash[:success] = "You're In!" 
     else
       flash[:danger] = "Sorry, that group is full :("
     end
     
-    redirect_to groups_path
+    redirect_to current_user
   end
 
   def destroy
@@ -37,7 +41,7 @@ class AttendancesController < ApplicationController
     current_user.save
     #NotificationsMailer.welcome_email().deliver
     flash[:danger] = "Cancelled" 
-    redirect_to groups_path
+    redirect_to current_user
   end
 
 end
