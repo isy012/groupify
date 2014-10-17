@@ -39,6 +39,7 @@ GEM
     coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.2.1)
+    geocoder (1.2.5)
     hike (1.2.3)
     hirb (0.7.2)
     i18n (0.6.11)
@@ -119,6 +120,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   coffee-rails (~> 4.0.0)
+  geocoder
   hirb
   jbuilder (~> 1.2)
   jquery-rails
