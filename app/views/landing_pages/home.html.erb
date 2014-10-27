@@ -1,37 +1,30 @@
 <% provide(:title, 'Home') %>
-
 <div class="titletext">
-<h1>80% of success in life is showing up. - Woody Allen</h1>
-<br><br>
-<p class="lead">Groupify lets you sign up for nearby group events and rewards you for staying committed.</p>
- <%= button_to "Sign Up", signup_path, :class => "btn btn-success btn-large", :method => 'get'%>
+ <%= button_to "Click Here To Start", signup_path, :class => "btn btn-success btn-large", :method => 'get'%>
+</div>
+
+<p class="lead">Join A Group</p>
+<div class="row">
+   <div class="col-xs-6">
+<% @group.take(4).each do |g| %>
+      <div class="panel panel-info">
+        <div class="panel-heading"><%= g.title %></div>
+          <div class="panel-footer">
+            Spots Left: 
+            <span class="badge"><%= g.seats %></span>
+          </div>
+      </div>
+<% end %>
+  </div>
+  <div class="col-xs-6">
+  <iframe src="https://www.google.com/calendar/embed?src=93pr117v24pqv4r2m8m0pimqhd0ih4f6%40import.calendar.google.com&ctz=America/New_York" style="border: 0" width="500" height="400" frameborder="0" scrolling="no"></iframe>
+</div>
 </div>
 <hr>
+<div class="titletext">
 
-<p class="lead"> Groups Forming Now</p>
-<% @group.take(5).each do |g| %>
-<div class="panel panel-info">
-  <div class="panel-heading"><%= g.title %></div>
-    <div class="panel-footer">
-      People Going: 
-      <span class="badge"><%= g.attendances.count %></span>
-    </div>
-  </div>
- <% end %>
+</div>
 
-
-<hr>
-<h1>Groupify Karma</h1>
-
-<p class="lead">
-<ol>
-  <li>Everytime you sign up for a deal, you earn karma.</li>
-  <li><s>Everyone hates flakes.</s> Others lose more than just money when you cancel.</li>
-  <li>When you don't show up, you lose. In fact, everyone loses. Not making good on your promises has negative consequences in our system.</li>
-  <li>Have feedback? Let us know by emailing us at groupmaster@usegroupify.com. </li>
-</ol>
-</p>
-<hr>
 </div>
 
 
