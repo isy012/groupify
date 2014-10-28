@@ -20,6 +20,8 @@ class AttendancesController < ApplicationController
         organizer.save
       end
       flash[:success] = "You're In!" 
+      #NotificationsMailer.welcome_email(current_user).deliver
+      NotificationsMailer.joingroup_email(current_user, group).deliver
     else
       flash[:danger] = "Sorry, that group is full :("
     end
@@ -28,18 +30,15 @@ class AttendancesController < ApplicationController
   end
 
   def destroy
-    #the current user's group id
-    #currentgroup = Group.find_by(params[:group_id])
     currentgroup = Attendance.find(params[:id]).group
     #destroy only the current user's id
     currentAttendance = Attendance.find_by(:group_id => currentgroup.id, :user_id => current_user.id)
-    #currentAttendance = Attendance.find_by(params[:id])
     currentAttendance.destroy
     currentgroup.seats = currentgroup.seats+1
     currentgroup.save
     current_user.karma -= 11
     current_user.save
-    #NotificationsMailer.welcome_email().deliver
+
     flash[:danger] = "Cancelled" 
     redirect_to current_user
   end

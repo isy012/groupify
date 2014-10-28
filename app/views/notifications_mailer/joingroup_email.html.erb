@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Look who's coming to <%= @group.title %> on <%= @group.when.strftime("%B %-d, %Y") %>!</h1>
+    <% @attending.each do |g| %>
+    	<li><%= User.find(g.user_id).name %></li>
+    <% end %>
+  </body>
+</html>
