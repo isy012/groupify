@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
   def index
     @group = Group.order('created_at DESC').all
     @user = User.all
+    @attendance = Attendance.all
   end
 
   def new
@@ -20,7 +21,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     
     #check to see if user has more than 5 events
-    if Group.where("user_id = ?", current_user.id).count <= 2
+    if Group.where("user_id = ?", current_user.id).count <= 20
       @group.user_id = current_user.id  
       current_user.karma += 10
     else
@@ -33,7 +34,8 @@ class GroupsController < ApplicationController
     respond_to do |format|
       if @group.save
         current_user.save
-        temp = Attendance.new(group_id: @group.id, user_id: current_user.id)
+        #first user
+        temp = Attendance.new(group_id: @group.id, user_id: current_user.id, status: "going", position: 1)
         temp.save
         format.html { redirect_to @group, notice: 'Group was successfully created.' }
         format.json { render action: 'show', status: :created, location: @group }

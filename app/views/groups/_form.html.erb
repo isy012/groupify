@@ -12,21 +12,22 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :title %><br>
+    <%= f.label :Event %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :content %>
+    <%= f.text_area :content %>
   </div>
     <div class="field">
-    <%= f.label :seats %><br>
+    <%= f.label :seats, "Spots, not including you" %><br>
     <%= f.number_field :seats %>
   </div>
   <div class="field">
-    <%= f.label :spots %><br>
+    <%= f.label :when, "Please Pick A Date" %><br>
     <%= f.date_field :when %>
   </div>
+  <br>
   <div class="actions">
     <%= f.submit %>
   </div>

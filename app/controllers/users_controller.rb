@@ -24,6 +24,7 @@ class UsersController < ApplicationController
   def show
   	#@user = User.find(params[:id])
     @group = Group.order('created_at DESC').all
+    @attendance = Attendance.all
   end
 
   def update

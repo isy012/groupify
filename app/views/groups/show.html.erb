@@ -6,16 +6,30 @@
         <%= link_to "View All Groups", groups_path %>
 <div class="panel panel-info">
   <!-- Default panel contents -->
-  <div class="panel-heading"><%= @group.title %></div>
+  <div class="panel-heading"><%= @group.title %> happening on <%= @group.when.to_formatted_s(:long) %></div>
   <div class="panel-body">
-    <p><%= @group.content %></p>
+    <p>The Info:<br> <%= @group.content %></p>
   </div>
 
   <!-- Table -->
   <table class="table table-bordered table-striped">
-    <tr><th>Name</th><th>Committed?</th></tr>
-<% @group.attendances.all.each do |gg| %>
-    <tr><td><%= User.find(gg.user_id).name %></td><td><span class="glyphicon glyphicon-ok"></span></td></tr>
+    <tr><th>Name</th><th>Status</th><th>Position</th></tr>
+
+      <% @group.attendances.all.sort_by(&:position).each do |gg| %>
+      <tr>
+      <td><%= User.find(gg.user_id).name %>
+      </td>
+      <td>
+        <%= gg.status %>
+      </td>
+      <td>
+        <%= gg.position %>
+      </td>
+    </tr>
+   
     <% end %>
+
+
   </table>
+
 </div>

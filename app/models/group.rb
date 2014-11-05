@@ -3,6 +3,6 @@ class Group < ActiveRecord::Base
   has_many :users, class_name: "Users", through: :attendances
   has_one :user
 
-  validates_numericality_of :seats, :only_integer => true, :greater_than_or_equal_to => 0 
+  validates_numericality_of :seats, :only_integer => true 
   validates(:when, 	presence: true)
 end

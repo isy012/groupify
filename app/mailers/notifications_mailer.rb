@@ -11,7 +11,7 @@ class NotificationsMailer < ActionMailer::Base
     @group = group
   	@attending = find_usernames_in_group(group)
 
-  	mail to: current_user.email, subject: 'Someone has joined the group'
+  	mail to: 'isy012@hotmail.com', subject: 'Someone has joined the group'
   end
 
   private

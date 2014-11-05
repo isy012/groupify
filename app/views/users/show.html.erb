@@ -11,27 +11,12 @@
 
 <br>
 <% @user.attendances.each do |g| %>
-
 <!-- how to check if user has attendance? -->
-
 <div class="panel panel-info">
   <div class="panel-heading"><%= link_to g.group.title + " @ " + g.group.when.to_formatted_s(:long), group_path(id: g.group.id) %> 
-  <span class="btn-group">
-  <!-- if user has not claimed it/// -->
-  <% if !current_user.attendances.find_by(group_id: g.group.id) %>
+<span class="btn-group">
 
-    <%= form_for(current_user.attendances.build(group_id: g.id)) do |f| %>
-    <div><%= hidden_field_tag :group_id, g.id %></div>
-    <%= f.submit "Reserve", class: "btn btn-primary btn-xs" %>
-    <% end %>
-  <!-- ///if user has not claimed it -->
-  <% else %> 
-  <!-- if user has claimed it show cancellation -->  
-    <%= form_for(current_user.attendances.find_by(user_id: current_user.id), html: { method: :delete, data: {confirm: 'Cancelling will cause a karma imbalance and may affect your future Groupify use. Are you sure?'} }) do |f| %>
-    <%= f.submit "Cancel", class: "btn btn-danger btn-xs" %>
-    <% end %>
-
-  <% end %>
+   <%= button_to 'Cancel', g, :confirm => 'Are you really sure?', :method => :delete, :class => 'btn btn-danger btn-xs' %>
 
    </span>
 
@@ -41,7 +26,7 @@
   </div>
   <div class="panel-footer">
   Spots Left <span class="badge"><%= g.group.seats %></span>
-  | People Going: 
+  | People Signed Up: 
   <% g.group.attendances.all.each do |gg| %>
   <span class="badge"><%= User.find(gg.user_id).name %></span>
   <% end %>

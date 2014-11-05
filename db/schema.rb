@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016005257) do
+ActiveRecord::Schema.define(version: 20141104235216) do
 
   create_table "attendances", force: true do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "status"
+    t.integer  "position"
   end
 
   add_index "attendances", ["group_id", "user_id"], name: "index_attendances_on_group_id_and_user_id", unique: true

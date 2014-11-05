@@ -1,47 +1,47 @@
 <% provide(:title, 'Groups') %>
 <% if !logged_in? %>
-<% provide(:title, @user.name) %>
+  <% provide(:title, @user.name) %>
 
-<% @group.each do |g| %>
+  <% @group.each do |g| %>
 
-<div class="panel panel-info">
-  <div class="panel-heading"><%= g.title %></div>
-    <div class="panel-body">
-      <%= g.content %>
+  <div class="panel panel-info">
+    <div class="panel-heading"><%= g.title %></div>
+      <div class="panel-body">
+        <%= g.content %>
+      </div>
+
+      <div class="panel-footer">
+        People Signed Up: 
+        <span class="badge"><%= g.attendances.count %></span>
+      </div>
     </div>
 
-    <div class="panel-footer">
-      People Going: 
-      <span class="badge"><%= g.attendances.count %></span>
-    </div>
+   <% end %>
+
   </div>
-
- <% end %>
-
-</div>
 <% else %>
 
 <h3>Today's Groups</h3>
-
+<div class="col-md-6">
 <% @group.each do |g| %>
-<!-- how to check if user has attendance? -->
+
 <div class="panel panel-info">
   <div class="panel-heading"><%= link_to g.title + " @ " + g.when.to_formatted_s(:long), group_path(id: g.id) %> organized by <%= User.find(g.user_id).name %>
   <span class="btn-group">
-  <!-- if user has not claimed it/// -->
+  <!-- if user has not joined it/// -->
   <% if !current_user.attendances.find_by(group_id: g.id) %>
-
 
     <%= form_for(current_user.attendances.build(group_id: g.id)) do |f| %>
     <div><%= hidden_field_tag :group_id, g.id %></div>
-    <%= f.submit "Reserve", class: "btn btn-primary btn-xs" %>
+    <%= f.submit "Sign Up", class: "btn btn-primary btn-xs" %>
     <% end %>
-  <!-- ///if user has not claimed it -->
+
   <% else %> 
-  <!-- if user has claimed it show cancellation -->  
-    <%= form_for(current_user.attendances.find_by(user_id: current_user.id), html: { method: :delete }) do |f| %>
-    <%= f.submit "Cancel", class: "btn btn-danger btn-xs" %>
-    <% end %>
+  <!-- if user has not joined the group -->  
+  <% @myattendance = Attendance.where(group_id: g.id, user_id: current_user.id) %>
+  <% for attribute in @myattendance %>
+   <%= button_to 'Cancel', attribute, :confirm => 'Are you really sure?', :method => :delete, :class => 'btn btn-danger btn-xs' %>
+  <% end %>
 
   <% end %>
 
@@ -53,7 +53,7 @@
   </div>
   <div class="panel-footer">
   Spots Left <span class="badge"><%= g.seats %></span>
-  | People Going: 
+  | People Signed Up: 
   <% g.attendances.all.each do |gg| %>
   <span class="badge"><%= User.find(gg.user_id).name %></span>
   <% end %>
@@ -62,7 +62,7 @@
 </div>
   <% end %>
 <% end %>
-
+</div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
