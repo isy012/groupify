@@ -1,14 +1,21 @@
 <% provide(:title, 'Home') %>
 <div class="titletext">
- <%= button_to "Click Here To Start", signup_path, :class => "btn btn-success btn-large", :method => 'get'%>
-</div>
 
-<p class="lead">Join A Group</p>
+
+  <div class="jumbotron">
+    <h1>Do You Like Waiting In Line?</h1>
+    <h2>Do You Love Attending Wharton?<h2>
+      <h3 class="text-warning">We Got You Covered!</h3>
+  </div>
+ <%= button_to "Click Here To Start Waiting Today", signup_path, :class => "btn btn-success btn-large", :method => 'get'%>
+  </div>
+<hr>
+<p class="lead">Lines you could be waiting in</p>
 <div class="row">
    <div class="col-xs-6">
-<% @group.take(4).each do |g| %>
+<% @group.take(3).each do |g| %>
       <div class="panel panel-info">
-        <div class="panel-heading"><%= g.title %></div>
+        <div class="panel-heading"><%= g.title %> created by <%= User.find(g.user_id).name %></div>
           <div class="panel-footer">
             Spots Left: 
             <span class="badge"><%= g.seats %></span>
@@ -17,7 +24,18 @@
 <% end %>
   </div>
   <div class="col-xs-6">
-  <iframe src="https://www.google.com/calendar/embed?src=93pr117v24pqv4r2m8m0pimqhd0ih4f6%40import.calendar.google.com&ctz=America/New_York" style="border: 0" width="500" height="400" frameborder="0" scrolling="no"></iframe>
+<blockquote>
+  <p>I didn't know how many lines I was missing out on until Groupify!</p>
+  <footer>Hitomi, WG15</footer>
+</blockquote>
+<blockquote>
+  <p>No more getting kicked out of line!</p>
+  <footer>Vicki, WG15</footer>
+</blockquote>
+<blockquote>
+  <p>Hell Yea</p>
+  <footer>Jim, WG15</footer>
+</blockquote>
 </div>
 </div>
 <hr>

@@ -4,11 +4,12 @@
 <% else %>
 <% provide(:title, @user.name) %>
 <div>
-      <h3>Your Groups</h3>
-  Karma: <%= current_user.karma %>
+      <h3>Lines You Are Waiting In</h3>
+  Karma Points: <%= current_user.karma %>
   <br>
-      <%= button_to "Create Your Own", new_group_path, :class => "btn btn-success btn-xs", :method => :get %>
-
+  Links: <%= link_to "See Lines I Could Be In", groups_path %>
+  or <%= link_to "Create Your Own", new_group_path %>
+<hr>
 <br>
 <% @user.attendances.each do |g| %>
 <!-- how to check if user has attendance? -->
