@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>A Cancellation Has Occured For <%= @group.title %> on <%= @group.when.strftime("%B %-d, %Y") %>!</h3>
+    <p><%= @current_user.name %> has decided not to attend.</p>
+  </body>
+</html>

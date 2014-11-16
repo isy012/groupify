@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :Event %><br>
+    <%= f.label :Event, "Name" %><br>
     <%= f.text_field :title %>
   </div>
   <div class="field">
@@ -25,8 +25,9 @@
   </div>
   <div class="field">
     <%= f.label :when, "Please Pick A Date" %><br>
-    <%= f.date_field :when %>
+     <%= f.datetime_select(:when,  ampm: true, :default => { :hour => 18, :minute => 59 }) %>
   </div>
+
   <br>
   <div class="actions">
     <%= f.submit %>

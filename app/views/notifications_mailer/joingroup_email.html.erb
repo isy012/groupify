@@ -4,9 +4,10 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Look who's coming to <%= @group.title %> on <%= @group.when.strftime("%B %-d, %Y") %>!</h1>
+    <h3>Look who's coming to <%= @group.title %> on <%= @group.when.strftime("%B %-d, %Y") %>!</h3>
     <% @attending.each do |g| %>
     	<li><%= User.find(g.user_id).name %></li>
     <% end %>
+    <p>This is so exciting!</p>
   </body>
 </html>

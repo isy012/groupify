@@ -29,11 +29,8 @@
   <%= image_tag("card1.jpg", height: '200', width: '250') %>
   </div>
   <div class="col-md-4">
-    <p><%= g.title + ' hosted by: ' + User.find(g.user_id).name %><br></p>
-    <%= link_to 'Click For More Information', group_path(id: g.id) %>
-<p>When: <%= g.when.to_formatted_s(:long) %>
-  <span class="btn-group">
 
+    <span class="btn-group">
       <!-- if user has not joined it/// -->
       <% if !current_user.attendances.find_by(group_id: g.id) %>
 
@@ -51,15 +48,25 @@
           <%= button_to 'Cancel', attribute, :confirm => 'Are you really sure?', :method => :delete, :class => 'btn btn-danger btn-xs' %>
           <% end %>
       <% end %>
+    </span>
+    <br>
+    <br>
 
-  </span>
-  <br>
+    <p><%= g.title + ' hosted by: ' + User.find(g.user_id).name %><br></p>
+    <%= link_to 'Click For More Information', group_path(id: g.id) %>
+<p>When: <%= g.when.strftime("%a, %b %d, %Y %l%p") %>
+
+    <br>
   <p>Reservations <span class="badge"><%= g.seats %></span><br>
   People Signed Up: 
     <% g.attendances.all.each do |gg| %>
     <span class="badge"><%= User.find(gg.user_id).name %></span>
     <% end %>
   </p>
+
+
+  
+
   </div>
   </div>
   <br>

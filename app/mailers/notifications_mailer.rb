@@ -10,8 +10,14 @@ class NotificationsMailer < ActionMailer::Base
   	@user = current_user
     @group = group
   	@attending = find_usernames_in_group(group)
+    emails = find_emails_in_group(group)
+  	mail to: 'groupmaster@usegroupify.com', bcc: emails, subject: 'Groupify! Someone has joined!'
+  end
 
-  	mail to: 'isy012@hotmail.com', subject: 'Someone has joined the group'
+  def leavegroup_email(current_user,group)
+    emails = find_emails_in_group(group)
+    @current_user = current_user
+    mail to: 'groupmaster@usegroupify.com', bcc: emails, subject: 'Groupify Cancellation'
   end
 
   private
@@ -21,5 +27,19 @@ class NotificationsMailer < ActionMailer::Base
     attendance = Attendance.where(:group_id => @group.id)
     return attendance
   end
+
+  def find_emails_in_group(group)
+    @group = group
+
+    attendance = Attendance.where(:group_id => @group.id)
+    logger.info("ATTENDANCE" + attendance.inspect)
+    emails = "" 
+    for items in attendance 
+      emails = emails + ", " + User.find(items.user_id).email.to_str
+    end
+    return emails
+
+  end
+
 
 end

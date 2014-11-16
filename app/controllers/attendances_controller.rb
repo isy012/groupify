@@ -52,6 +52,10 @@ class AttendancesController < ApplicationController
   def destroy
     currentAttendance = Attendance.find(params[:id])
     currentgroup = Group.find(currentAttendance.group_id)
+    
+    #send look who can't make it anymore
+    leavegroup(current_user,currentgroup)
+    
     currentAttendance.destroy
     currentgroup.seats = currentgroup.seats+1
     currentgroup.save
@@ -59,6 +63,7 @@ class AttendancesController < ApplicationController
     current_user.save
 
     flash[:danger] = "Cancelled" 
+
     redirect_to groups_path
   end
 
@@ -72,6 +77,12 @@ class AttendancesController < ApplicationController
   def joinemail(user,group)
     NotificationsMailer.joingroup_email(user, group).deliver
   end
+
+  def leavegroup(user,group)
+     NotificationsMailer.leavegroup_email(user, group).deliver
+  end
+
+
 
 
 end

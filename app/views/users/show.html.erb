@@ -4,39 +4,45 @@
 <% else %>
 
 <% provide(:title, @user.name) %>
+
 <div>
-      <h1>Your Group Reservations</h1>
-  Karma Points: <%= current_user.karma %>
-  <br>
-  <%= link_to "Find More Reservations", groups_path %>
-  or <%= link_to "Create Your Own", new_group_path %>
-<hr>
-<br>
-<% @user.attendances.each do |g| %>
-<!-- how to check if user has attendance? -->
-<div class="panel panel-info">
-  <div class="panel-heading"><%= link_to g.group.title + " @ " + g.group.when.to_formatted_s(:long), group_path(id: g.group.id) %> 
-<span class="btn-group">
 
+  <p>Karma: <%= current_user.karma %> | 
+  <%= link_to "Find More Reservations", groups_path %> | <%= link_to "Create Your Own", new_group_path %>
+</p>
+    <h1>Your Group Reservations</h1>
+  <hr>
+  
+  <br>
+  
+  <div class="row">
+    <div class="col-md-8">
+  <% @user.attendances.each do |g| %>
+  <div class="row">
+    <div class="col-md-7">
+      <%= link_to g.group.title + " on " + g.group.when.strftime("%a, %b %d, %Y %l%p"), group_path(id: g.group.id) %> 
+ <br>
+  <p>
+    Spots Left: <%= g.group.seats %>
+    | People Signed Up: 
+      <% g.group.attendances.all.each do |gg| %>
+      <span class="badge"><%= User.find(gg.user_id).name %></span>
+      <% end %>
+    </div>
+    <div class="col-md-1">
+  <span class="btn-group">
    <%= button_to 'Cancel', g, :confirm => 'Are you really sure?', :method => :delete, :class => 'btn btn-danger btn-xs' %>
-
-   </span>
-
-  </div>
-  <div class="panel-body">
-  <%= g.group.content %>
-  </div>
-  <div class="panel-footer">
-  Spots Left <span class="badge"><%= g.group.seats %></span>
-  | People Signed Up: 
-  <% g.group.attendances.all.each do |gg| %>
-  <span class="badge"><%= User.find(gg.user_id).name %></span>
-  <% end %>
+  </span>
+</div>
+  </p>
+</div>
   <br>
+
+  <% end %><!-- end for loop -->
 </div>
-</div>
-  <% end %>
-<% end %>
+<% end %> <!-- end if logged in -->
+
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -1,35 +1,42 @@
 <% provide(:title, @group.title) %>
 
-        <td><%= link_to 'Edit', edit_group_path(@group) %></td>
-        <td><%= link_to 'Cancel Group', @group, method: :delete, data: { confirm: 'Cancelling the event will notify the group. Are you sure?' } %></td>
-        <%= link_to "View My Groups", current_user %>
-        <%= link_to "View All Groups", groups_path %>
-<div class="panel panel-info">
+<br>
+<br>
+<div class="row">
+  <div class="col-md-6">
+<div class="panel panel-default">
   <!-- Default panel contents -->
-  <div class="panel-heading"><%= @group.title %> happening on <%= @group.when.to_formatted_s(:long) %></div>
-  <div class="panel-body">
-    <p>The Info:<br> <%= @group.content %></p>
-  </div>
+    <div class="panel-heading"><%= @group.title %> hosted by: <%= User.find(@group.user_id).name  %></div>
+    <div class="panel-body">
+      When: <%= @group.when.strftime("%a, %b %d, %Y %l%p") %>
+      <br>
+    Description: <%= @group.content %>
+    </div>
 
-  <!-- Table -->
-  <table class="table table-bordered table-striped">
+    <!-- Table -->
+    <table class="table table-bordered table-striped">
     <tr><th>Name</th><th>Status</th><th>Position</th></tr>
 
-      <% @group.attendances.all.sort_by(&:position).each do |gg| %>
-      <tr>
-      <td><%= User.find(gg.user_id).name %>
-      </td>
-      <td>
-        <%= gg.status %>
-      </td>
-      <td>
-        <%= gg.position %>
-      </td>
+    <% @group.attendances.all.sort_by(&:position).each do |gg| %>
+    <tr>
+    <td><%= User.find(gg.user_id).name %>
+    </td>
+    <td>
+    <%= gg.status %>
+    </td>
+    <td>
+    <%= gg.position %>
+    </td>
     </tr>
-   
     <% end %>
-
-
-  </table>
-
+    </table>
+  </div>
 </div>
+</div>
+
+<br><br>
+<p>Admin Only Zone</p>
+<%= link_to 'Edit', edit_group_path(@group) %>
+<%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Cancelling the event will notify the group. Are you sure?' } %>
+<%= link_to "View My Groups", current_user %>
+<%= link_to "View All Groups", groups_path %>
