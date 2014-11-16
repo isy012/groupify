@@ -2,12 +2,13 @@
          Please  <%= link_to 'Sign Up', signup_path %> or 
           <%= link_to "Log in", login_path %>
 <% else %>
+
 <% provide(:title, @user.name) %>
 <div>
-      <h3>Lines You Are Waiting In</h3>
+      <h1>Your Group Reservations</h1>
   Karma Points: <%= current_user.karma %>
   <br>
-  Links: <%= link_to "See Lines I Could Be In", groups_path %>
+  <%= link_to "Find More Reservations", groups_path %>
   or <%= link_to "Create Your Own", new_group_path %>
 <hr>
 <br>

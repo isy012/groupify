@@ -1,27 +1,17 @@
 <% provide(:title, 'Home') %>
-<div class="titletext">
 
 
-<div class="listing">
-   <div class="col-xs-6">
-<% @group.take(3).each do |g| %>
-      <div class="panel panel-info">
-        <div class="panel-heading"><%= g.title %> created by <%= User.find(g.user_id).name %></div>
-          <div class="panel-footer">
-            Spots Left: 
-            <span class="badge"><%= g.seats %></span>
-          </div>
-      </div>
+<div class="row">
+<% @group.take(12).each do |g| %>
+  <div class="col-md-3">
+    <%= image_tag("card1.jpg", height: '200', width: '250') %><p>
+    <%= g.title %> hosted by <%= User.find(g.user_id).name %>
+    Guests: <%= g.seats %></p>
+    </div>
 <% end %>
-  </div>
-
-</div>
-<hr>
-<div class="titletext">
 
 </div>
 
-</div>
 
 
 <script>
