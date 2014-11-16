@@ -2,16 +2,7 @@
 <div class="titletext">
 
 
-  <div class="jumbotron">
-    <h1>Do You Like Waiting In Line?</h1>
-    <h2>Do You Love Attending Wharton?<h2>
-      <h3 class="text-warning">We Got You Covered!</h3>
-  </div>
- <%= button_to "Click Here To Start Waiting Today", signup_path, :class => "btn btn-success btn-large", :method => 'get'%>
-  </div>
-<hr>
-<p class="lead">Lines you could be waiting in</p>
-<div class="row">
+<div class="listing">
    <div class="col-xs-6">
 <% @group.take(3).each do |g| %>
       <div class="panel panel-info">
@@ -23,20 +14,7 @@
       </div>
 <% end %>
   </div>
-  <div class="col-xs-6">
-<blockquote>
-  <p>I didn't know how many lines I was missing out on until Groupify!</p>
-  <footer>Hitomi, WG15</footer>
-</blockquote>
-<blockquote>
-  <p>No more getting kicked out of line!</p>
-  <footer>Vicki, WG15</footer>
-</blockquote>
-<blockquote>
-  <p>Hell Yea</p>
-  <footer>Jim, WG15</footer>
-</blockquote>
-</div>
+
 </div>
 <hr>
 <div class="titletext">

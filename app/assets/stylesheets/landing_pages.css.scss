@@ -2,16 +2,20 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body { 
-} 
-
 .titletext {
   text-align: center;
 }
 
 .carouselwrapping {
-padding-right: 25%;
-padding-left: 25%;
-margin-right: auto;
-margin-left: auto;
+	padding-right: 25%;
+	padding-left: 25%;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.listing {
+	@include make-row();
+	.group {
+		@include make-md-column(3);
+	}
 }

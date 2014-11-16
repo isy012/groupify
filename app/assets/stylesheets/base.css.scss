@@ -1,0 +1,24 @@
+$lightblue : #5A637E; 
+$darkblue : #3B4152;
+$graytext: #CED1D1;
+$bluetext: #9FA6BA;
+
+body {
+	background-image: -webkit-linear-gradient(top, $lightblue  42%, $darkblue 100%);
+	background-image: -moz-linear-gradient(top, $lightblue  42%, $darkblue 100%);
+	background-attachment:fixed;	
+}
+
+h1 p{
+	color: $graytext
+}
+
+a {
+  color: $graytext;
+  &:visited {
+    color: $graytext;
+  }
+  &:hover {
+    color: #fff;
+  }
+}
