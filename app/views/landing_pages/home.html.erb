@@ -1,17 +1,19 @@
 <% provide(:title, 'Home') %>
-
-
+<h1>Group Reservations</h1>
 <div class="row">
 <% @group.take(12).each do |g| %>
-  <div class="col-md-3">
-    <%= image_tag("card1.jpg", height: '200', width: '250') %><p>
-    <%= g.title %> hosted by <%= User.find(g.user_id).name %>
-    Guests: <%= g.seats %></p>
-    </div>
-<% end %>
-
+<div class="col-md-6">
+<div class="box">
+  <h1 class="title"><%= g.title %></h1>
+  <p class="text"><%= g.content %></p>
+  <p class="text inset">
+    Hosted by <%= User.find(g.user_id).name %><br>
+    <%= g.when.strftime("%a, %b %d at %l%p") %><br>
+  </p>
+</div><br><br>
 </div>
-
+<% end %>
+</div>
 
 
 <script>
